@@ -28,6 +28,7 @@ import (
 	"github.com/bitnami-labs/kubewatch/pkg/handlers/msteam"
 	"github.com/bitnami-labs/kubewatch/pkg/handlers/slack"
 	"github.com/bitnami-labs/kubewatch/pkg/handlers/smtp"
+	"github.com/bitnami-labs/kubewatch/pkg/handlers/telegram"
 	"github.com/bitnami-labs/kubewatch/pkg/handlers/webhook"
 )
 
@@ -57,6 +58,8 @@ func ParseEventHandler(conf *config.Config) handlers.Handler {
 		eventHandler = new(msteam.MSTeams)
 	case len(conf.Handler.SMTP.Smarthost) > 0 || len(conf.Handler.SMTP.To) > 0:
 		eventHandler = new(smtp.SMTP)
+	case len(conf.Handler.Telegram.BotToken) > 0 || conf.Handler.Telegram.ChatId > 0:
+		eventHandler = new(telegram.Telegram)
 	default:
 		eventHandler = new(handlers.Default)
 	}
