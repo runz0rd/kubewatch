@@ -44,6 +44,7 @@ type Handler struct {
 	Webhook    Webhook    `json:"webhook"`
 	MSTeams    MSTeams    `json:"msteams"`
 	SMTP       SMTP       `json:"smtp"`
+	Telegram   Telegram   `json:"telegram"`
 }
 
 // Resource contains resource configuration
@@ -117,6 +118,12 @@ type Flock struct {
 type Webhook struct {
 	// Webhook URL.
 	Url string `json:"url"`
+}
+
+// Telegram contains telegram configuration
+type Telegram struct {
+	BotToken string `json:"bot_token"`
+	ChatId   int64  `json:"chat_id"`
 }
 
 // MSTeams contains MSTeams configuration
